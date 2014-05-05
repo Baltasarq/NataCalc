@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	  <title>NataCalc</title>
+  </head>
+  <body>
+	<h1 style="color:blue">NataCalc</h1>
+	<p>
+	<h2 style="color:blue">Datos</h2>
+    <div id="datos">
+		<p>
+		<pre style="background-color:lightgray;">
+{{d}}kms. en {{h}}:{{m}}:{{s}}
+		</pre>
+		</p>
+    </div>
+    <h2 style="color:blue">Resultados</h2>
+    <div id="resultados">
+		<p>
+		<pre style="background-color:lightgray;">
+{{kmsh}} kms/h
+<br>
+{{t100m}} t/100m
+{{tkm}} t/km
+		</pre>
+		</p>
+    </div>
+    <p><button style="background-color:blue;color:white;" onClick="history.go(-1);return true;">Nuevo cálculo</button></p>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html itemscope="itemscope" itemtype="http://schema.org/WebPage">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	  <title>NataCalc</title>
+	  
+	  <script>
+		function hideAnswer()
+		{
+			var dvAnswer = document.getElementById( "dvAnswer" );
+			
+			dvAnswer.innerHTML = "";
+			dvAnswer.style.display = "none";
+		}
+		
+		function showAnswer(msg)
+		{
+			var dvAnswer = document.getElementById( "dvAnswer" );
+			
+			dvAnswer.innerHTML = msg;
+			dvAnswer.style.display = "block";
+		}
+		
+		function validate()
+		{
+			var toret = false;
+			var frmInput = document.getElementById( "frmInput" );
+			var h = 0;
+			var m = 0;
+			var s = 0;
+			var d = 0.0;
+			
+			// Prepare answer, in case it is needed.
+			hideAnswer();
+			
+                        // Prepare values
+                        var strH = frmInput[ "h" ].value.trim();
+			var strM = frmInput[ "m" ].value.trim();
+			var strS = frmInput[ "s" ].value.trim();
+			var strD = frmInput[ "d" ].value.trim().replace( ",", "." );
+                        
+                        if ( strH.length === 0 ) {
+                                strH = "0";
+                        }
+                        if ( strM.length === 0 ) {
+                                strM = "0";
+                        }
+                        if ( strS.length === 0 ) {
+                                strS = "0";
+                        }
+                        if ( strD.length === 0 ) {
+                                strD = "0";
+                        }
+                        
+			// Validate
+			h = parseInt( strH );
+			m = parseInt( strM );
+			s = parseInt( strS );
+			d = parseFloat( strD );
+			
+			if ( isNaN( h )
+			  || isNaN( m )
+			  || isNaN( s )
+			  || isNaN( d ) )
+			{
+				showAnswer( "Sólo se permiten introducir dígitos." );
+			} else {
+				if ( m > 59 ) {
+					showAnswer( "Error: minutos no puede ser mayor que 59." );
+				}
+				else
+				if ( s > 59 ) {
+					showAnswer( "Error: segundos no puede ser mayor que 59." );
+				}
+				else
+				if ( d < 0.1 ) {
+					showAnswer( "Error: distancia no puede ser menor de 100m (0.1kms.)" );
+				}
+				else {
+					toret = true;
+				}
+			}
+			
+			return toret;
+		}
+    </script>
+  </head>
+  <body>
+	<h1 style="color:blue">NataCalc</h1>
+	<p>
+    <form id="frmInput" action="/calc" onSubmit="return validate();" method="post" style="background-color:lightgray">
+      <div>Horas: <input type="text" name="h" id="h" size="2" maxLength="2" placeholder="00" style="border:none;background-color:lightgray"/>
+		Minutos: <input type="text" name="m" id="m" size="2" maxLength="2" placeholder="00" style="border:none;background-color:lightgray" />
+		Segundos: <input type="text" name="s" id="s" size="2" maxLength="2" placeholder="00" style="border:none;background-color:lightgray" />
+      </div>
+      <p>
+	  <div>Distancia: <input type="text" name="d" id="d" size="5" maxLength="5" placeholder="00.0" style="border:none;background-color:lightgray"/>kms.</div>
+	  <p>
+      <div><input type="submit" value="Calcular" style="background-color:blue;color:white;"><input type="reset" style="background-color:blue;color:white;" onClick="hideAnswer();"></div>
+      </p>
+    </form>
+    <div id="dvAnswer" style="color:white;background-color:red;display:none">
+    </div>
+  </body>
+</html>
