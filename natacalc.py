@@ -54,7 +54,7 @@ class ResultsPage(webapp2.RequestHandler):
 			'h': str.format( "{0:02}", self.hours ),
 			'm': str.format( "{0:02}", self.minutes ),
 			's': str.format( "{0:02}", self.seconds ),
-			'kmsh': str.format( "{0:4.2}", calc.getKmsPerHour() ),
+			'kmsh': str.format( "{0:5.2}", calc.getKmsPerHour() ),
 			't100m': Calculator.formatTime( calc.getTimePer100m() ),
 			'tkm': Calculator.formatTime( calc.getTimePer1000m() ),
                 }
