@@ -35,12 +35,14 @@ class Calculator:
 	def calculate(self):
 		total = Calculator.cnvtToSeconds( self.hours, self.minutes, self.seconds );
 
+                total = float( total )
+
                 if ( total > 0 \
                  and self.distance > 0 ):
                         # Results
-                        self.kmsh = self.distance / ( total / 3600 );
+                        self.kmsh = self.distance / ( total / 3600.0 );
                         self.t1000m = total / self.distance;
-                        self.t100m = total / ( self.distance * 10 );
+                        self.t100m = total / ( self.distance * 10.0 );
 
 	def getKmsPerHour(self):
 		return self.kmsh;
