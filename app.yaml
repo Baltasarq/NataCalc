@@ -9,6 +9,10 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
+- url: /natacalc\.css
+  static_files: natacalc.css
+  upload: natacalc\.css
+
 - url: /
   static_files: index.html
   upload: index\.html
