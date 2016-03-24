@@ -2,10 +2,10 @@
 
 class Calculator:
 	def __init__(self, d, h, m, s):
-		self.distance = float( d )
-		self.hours = float( h )
-		self.minutes = float( m )
-		self.seconds = float( s )
+		self.distance = float(d)
+		self.hours = float(h)
+		self.minutes = float(m)
+		self.seconds = float(s)
 
 		self.kmsh = 0.0
 		self.t100m = 0.0
@@ -13,15 +13,15 @@ class Calculator:
 
 	@staticmethod
 	def cnvtToSeconds(h, m, s):
-		return ( s + ( m * 60 ) + ( h * 3600 ) );
+		return (s + (m * 60) + (h * 3600));
 
 	@staticmethod
 	def formatTime(v):
 		toret = "";
 
 		h = v / 3600;
-		m = ( v % 3600 ) / 60;
-		s = ( v % 3600 ) % 60;
+		m = (v % 3600) / 60;
+		s = (v % 3600) % 60;
 
 		strH = "%02d" % h;
 		strM = "%02d" % m;

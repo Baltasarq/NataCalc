@@ -85,6 +85,47 @@
 
 			return toret;
 		}
+
+		function parseGetParams() {
+			var toret = {};
+
+			location.search
+				.substr( 1 )
+					.split( '&' )
+					.forEach( function (item) {
+						var tmp = item.split( '=' );
+						toret[ tmp[ 0 ].trim().toLowerCase() ] =
+									decodeURIComponent( tmp[ 1 ].trim() );
+			});
+
+			return toret;
+		}
+
+		window.onload = function() {
+			var dict = parseGetParams();
+
+			for (k in dict) {
+				if ( dict.hasOwnProperty( k ) ) {
+					if ( k == 'd' ) {
+						document.getElementById( "d" ).value = dict[ k ];
+					}
+					else
+					if ( k == 'h' ) {
+						document.getElementById( "h" ).value = dict[ k ];
+					}
+					else
+					if ( k == 'm' ) {
+						document.getElementById( "m" ).value = dict[ k ];
+					}
+					else
+					if ( k == 's' ) {
+						document.getElementById( "s" ).value = dict[ k ];
+					}
+				}
+			}
+
+			document.getElementById( "frmInput" ).submit();
+		};
     </script>
   </head>
   <body>
