@@ -38,15 +38,14 @@ def parseInt(s):
 class ResultsPage(webapp2.RequestHandler):
 	AnswerPageFile = "answer.html";
 
-	def __init__(self, request=None, response=None):
-		self.initialize(request, response)
-
+	def load_input(self):
 		self.hours = parseInt(self.request.get("h", "0"));
 		self.minutes = parseInt(self.request.get( "m", "1"));
 		self.seconds = parseInt(self.request.get( "s", "30"));
 		self.distance = parseFloat(self.request.get( "d", "0.1"));
 
 	def post(self):
+		self.load_input()
 		calc = Calculator( self.distance, self.hours, self.minutes, self.seconds );
 		calc.calculate();
 

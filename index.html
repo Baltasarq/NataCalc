@@ -41,16 +41,16 @@
 			var strS = frmInput[ "s" ].value.trim();
 			var strD = frmInput[ "d" ].value.trim().replace( ",", "." );
 
-                        if ( strH.length === 0 ) {
+                        if ( strH.trim().length === 0 ) {
                                 strH = "0";
                         }
-                        if ( strM.length === 0 ) {
+                        if ( strM.trim().length === 0 ) {
                                 strM = "0";
                         }
-                        if ( strS.length === 0 ) {
+                        if ( strS.trim().length === 0 ) {
                                 strS = "0";
                         }
-                        if ( strD.length === 0 ) {
+                        if ( strD.trim().length === 0 ) {
                                 strD = "0";
                         }
 
@@ -67,12 +67,20 @@
 			{
 				showAnswer( "Sólo se permiten introducir dígitos." );
 			} else {
-				if ( m > 59 ) {
-					showAnswer( "Error: minutos no puede ser mayor que 59." );
+				if ( h < 0 ) {
+					showAnswer( "Error: horas no puede ser menor que 0." );
 				}
 				else
-				if ( s > 59 ) {
-					showAnswer( "Error: segundos no puede ser mayor que 59." );
+				if ( m < 0
+				  || m > 59 )
+				{
+					showAnswer( "Error: minutos no puede ser mayor que 59 ni menor que 0." );
+				}
+				else
+				if ( s > 59
+				  || s < 0)
+				{
+					showAnswer( "Error: segundos no puede ser mayor que 59 ni menor que 0." );
 				}
 				else
 				if ( d < 0.1 ) {
