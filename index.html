@@ -1,139 +1,138 @@
 <!DOCTYPE html>
-<html itemscope="itemscope" itemtype="http://schema.org/WebPage">
+<html>
   <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<title>NataCalc</title>
-	<link href="natacalc.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <title>NataCalc</title>
+    <link href="natacalc.css" rel="stylesheet" type="text/css" />
 
-	  <script>
-		function hideAnswer()
-		{
-			var dvAnswer = document.getElementById( "dvAnswer" );
+    <script>
+    function hideAnswer()
+    {
+        var dvAnswer = document.getElementById( "dvAnswer" );
 
-			dvAnswer.innerHTML = "";
-			dvAnswer.style.display = "none";
-		}
+        dvAnswer.innerHTML = "";
+        dvAnswer.style.display = "none";
+    }
 
-		function showAnswer(msg)
-		{
-			var dvAnswer = document.getElementById( "dvAnswer" );
+    function showAnswer(msg)
+    {
+        var dvAnswer = document.getElementById( "dvAnswer" );
 
-			dvAnswer.innerHTML = msg;
-			dvAnswer.style.display = "block";
-		}
+        dvAnswer.innerHTML = msg;
+        dvAnswer.style.display = "block";
+    }
 
-		function validate()
-		{
-			var toret = false;
-			var frmInput = document.getElementById( "frmInput" );
-			var h = 0;
-			var m = 0;
-			var s = 0;
-			var d = 0.0;
+    function validate()
+    {
+        var toret = false;
+        var frmInput = document.getElementById( "frmInput" );
+        var h = 0;
+        var m = 0;
+        var s = 0;
+        var d = 0.0;
 
-			// Prepare answer, in case it is needed.
-			hideAnswer();
+        // Prepare answer, in case it is needed.
+        hideAnswer();
 
-                        // Prepare values
-                        var strH = frmInput[ "h" ].value.trim();
-			var strM = frmInput[ "m" ].value.trim();
-			var strS = frmInput[ "s" ].value.trim();
-			var strD = frmInput[ "d" ].value.trim().replace( ",", "." );
+        // Prepare values
+        var strH = frmInput[ "h" ].value.trim();
+        var strM = frmInput[ "m" ].value.trim();
+        var strS = frmInput[ "s" ].value.trim();
+        var strD = frmInput[ "d" ].value.trim().replace( ",", "." );
 
-                        if ( strH.trim().length === 0 ) {
-                                strH = "0";
-                        }
-                        if ( strM.trim().length === 0 ) {
-                                strM = "0";
-                        }
-                        if ( strS.trim().length === 0 ) {
-                                strS = "0";
-                        }
-                        if ( strD.trim().length === 0 ) {
-                                strD = "0";
-                        }
+        if ( strH.trim().length === 0 ) {
+                strH = "0";
+        }
+        if ( strM.trim().length === 0 ) {
+                strM = "0";
+        }
+        if ( strS.trim().length === 0 ) {
+                strS = "0";
+        }
+        if ( strD.trim().length === 0 ) {
+                strD = "0";
+        }
 
-			// Validate
-			h = parseInt( strH );
-			m = parseInt( strM );
-			s = parseInt( strS );
-			d = parseFloat( strD );
+        // Validate
+        h = parseInt( strH );
+        m = parseInt( strM );
+        s = parseInt( strS );
+        d = parseFloat( strD );
 
-			if ( isNaN( h )
-			  || isNaN( m )
-			  || isNaN( s )
-			  || isNaN( d ) )
-			{
-				showAnswer( "Sólo se permiten introducir dígitos." );
-			} else {
-				if ( h < 0 ) {
-					showAnswer( "Error: horas no puede ser menor que 0." );
-				}
-				else
-				if ( m < 0
-				  || m > 59 )
-				{
-					showAnswer( "Error: minutos no puede ser mayor que 59 ni menor que 0." );
-				}
-				else
-				if ( s > 59
-				  || s < 0)
-				{
-					showAnswer( "Error: segundos no puede ser mayor que 59 ni menor que 0." );
-				}
-				else
-				if ( d < 0.1 ) {
-					showAnswer( "Error: distancia no puede ser menor de 100m (0.1kms.)" );
-				}
-				else {
-					toret = true;
-				}
-			}
+        if ( isNaN( h )
+          || isNaN( m )
+          || isNaN( s )
+          || isNaN( d ) )
+        {
+            showAnswer( "Sólo se permiten introducir dígitos." );
+        } else {
+            if ( h < 0 ) {
+                showAnswer( "Error: horas no puede ser menor que 0." );
+            }
+            else
+            if ( m < 0
+              || m > 59 )
+            {
+                showAnswer( "Error: minutos no puede ser mayor que 59 ni menor que 0." );
+            }
+            else
+            if ( s > 59
+              || s < 0)
+            {
+                showAnswer( "Error: segundos no puede ser mayor que 59 ni menor que 0." );
+            }
+            else
+            if ( d < 0.1 ) {
+                showAnswer( "Error: distancia no puede ser menor de 100m (0.1kms.)" );
+            }
+            else {
+                toret = true;
+            }
+        }
 
-			return toret;
-		}
+        return toret;
+    }
 
-		function parseGetParams() {
-			var toret = {};
+    function parseGetParams() {
+        var toret = {};
 
-			location.search
-				.substr( 1 )
-					.split( '&' )
-					.forEach( function (item) {
-						var tmp = item.split( '=' );
-						toret[ tmp[ 0 ].trim().toLowerCase() ] =
-									decodeURIComponent( tmp[ 1 ].trim() );
-			});
+        location.search
+            .substr( 1 )
+                .split( '&' )
+                .forEach( function (item) {
+                    var tmp = item.split( '=' );
+                    toret[ tmp[ 0 ].trim().toLowerCase() ] =
+                                decodeURIComponent( tmp[ 1 ].trim() );
+        });
 
-			return toret;
-		}
+        return toret;
+    }
 
-		window.onload = function() {
-			var dict = parseGetParams();
+    window.onload = function() {
+        var dict = parseGetParams();
 
-			for (k in dict) {
-				if ( dict.hasOwnProperty( k ) ) {
-					if ( k == 'd' ) {
-						document.getElementById( "d" ).value = dict[ k ];
-					}
-					else
-					if ( k == 'h' ) {
-						document.getElementById( "h" ).value = dict[ k ];
-					}
-					else
-					if ( k == 'm' ) {
-						document.getElementById( "m" ).value = dict[ k ];
-					}
-					else
-					if ( k == 's' ) {
-						document.getElementById( "s" ).value = dict[ k ];
-					}
-				}
-			}
+        for (k in dict) {
+            if ( dict.hasOwnProperty( k ) ) {
+                if ( k == 'd' ) {
+                    document.getElementById( "d" ).value = dict[ k ];
+                }
+                else
+                if ( k == 'h' ) {
+                    document.getElementById( "h" ).value = dict[ k ];
+                }
+                else
+                if ( k == 'm' ) {
+                    document.getElementById( "m" ).value = dict[ k ];
+                }
+                else
+                if ( k == 's' ) {
+                    document.getElementById( "s" ).value = dict[ k ];
+                }
+            }
+        }
 
-			document.getElementById( "frmInput" ).submit();
-		};
+        document.getElementById( "frmInput" ).submit();
+    };
     </script>
   </head>
   <body>
@@ -142,13 +141,26 @@
 	</div>
     <div id="dvInput">
     <form id="frmInput" action="/calc" onSubmit="return validate();" method="post">
-      <div id="dvTime">Horas: <input type="text" name="h" id="h" size="2" maxLength="2" placeholder="00"/>
-		Minutos: <input type="text" name="m" id="m" size="2" maxLength="2" placeholder="00"/>
-		Segundos: <input type="text" name="s" id="s" size="2" maxLength="2" placeholder="00"/>
+      <div id="dvTime">
+          <label for="h">Horas:</label>
+          <input type="number" name="h" id="h" min="0" max="9999999"
+                 placeholder="00"/>h&nbsp;
+          <label for="m">Minutos:</label>
+          <input type="number" name="m" id="m" min="0" max="59"
+                 placeholder="00"/>'&nbsp;
+          <label>Segundos:</label>
+          <input type="number" name="s" id="s" min="0" max="59"
+                 placeholder="00"/>"&nbsp;
       </div>
       <p>
-	  <div id="dvDistance">Distancia: <input type="text" name="d" id="d" size="5" maxLength="5" placeholder="00.0"/>kms.</div>
-      <div id="dvButtons"><input id="btSubmit" type="submit" value="Calcular"><input id="btReset" type="reset" onClick="hideAnswer();"></div>
+      <div id="dvDistance">
+          <label for="d">Distancia:</label>
+          <input type="number" name="d" id="d" min="0" max="9999999" step="0.1"
+                 placeholder="00.0"/>
+                 km</div>
+      <div id="dvButtons">
+          <input id="btSubmit" type="submit" value="Calcular">
+          <input id="btReset" type="reset" onClick="hideAnswer();"></div>
       </p>
     </form>
     </div>

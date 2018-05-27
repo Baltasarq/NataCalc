@@ -37,7 +37,12 @@ body {
     selection: none;
     background-color: lightgray;
     font-family: monospace;
-    font-size: 16pt
+    font-size: 16pt;
+    text-align: right
+}
+
+#m, #s, #d {
+	size: 2em
 }
 
 #dvButtons {
