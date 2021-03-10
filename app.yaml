@@ -10,15 +10,15 @@ handlers:
   upload: favicon\.ico
 
 - url: /natacalc\.css
-  static_files: natacalc.css
-  upload: natacalc\.css
+  static_files: templates/natacalc.css
+  upload: templates/natacalc\.css
 
 - url: /
-  static_files: index.html
-  upload: index\.html
+  static_files: templates/index.html
+  upload: templates/index\.html
 
 - url: .*
-  script: natacalc.app
+  script: handlers.main.app
 
 libraries:
 - name: webapp2

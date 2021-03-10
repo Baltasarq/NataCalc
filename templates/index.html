@@ -142,15 +142,16 @@
     <div id="dvInput">
     <form id="frmInput" action="/calc" onSubmit="return validate();" method="post">
       <div id="dvTime">
-          <label for="h">Horas:</label>
-          <input type="number" name="h" id="h" min="0" max="9999999"
-                 placeholder="00"/>h&nbsp;
-          <label for="m">Minutos:</label>
-          <input type="number" name="m" id="m" min="0" max="59"
-                 placeholder="00"/>'&nbsp;
-          <label>Segundos:</label>
-          <input type="number" name="s" id="s" min="0" max="59"
-                 placeholder="00"/>"&nbsp;
+          <label>Tiempo:</label>
+          <input type="number" name="h" id="h"
+                 min="0" max="9999" placeholder="00"
+                 style="width: 100px"/>h&nbsp;
+          <input type="number" name="m" id="m"
+                 min="0" max="59" placeholder="00"
+                 style="width: 100px"/>'&nbsp;
+          <input type="number" name="s" id="s"
+                 min="0" max="59" placeholder="00"
+                 style="width: 100px"/>"&nbsp;
       </div>
       <p>
       <div id="dvDistance">
