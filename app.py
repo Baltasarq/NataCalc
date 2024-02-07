@@ -1,16 +1,13 @@
+#! /bin/env python
 # NataCalc (c) 2022 Baltasar MIT License <jbgarcia@uvigo.es>
 # Application for calculating mean pace swimming times.
 
 
-from flask import Flask
-from flask import render_template
-from flask import request
-from flask import send_from_directory
-
+import flask
 from core.libnatacalc import Calculator
 
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
 
 
 def parse_float(s):
@@ -38,27 +35,21 @@ def parse_int(s):
     return toret
 
 
-def load_input(request):
-    return (parse_int(request.form["h"]),
-            parse_int(request.form["m"]),
-            parse_int(request.form["s"]),
-            parse_float(request.form["d"]))
-
-
 @app.route("/favicon.ico")
-@app.route("/natacalc.css")
 def get_static():
-    return send_from_directory(app.static_folder, request.path[1:])
-
-
-@app.route("/")
-def get_index():
-    return send_from_directory(app.template_folder, "index.html")
-
-
-@app.route("/calc", methods=['POST'])
-def post_calculate():
-    hours, minutes, seconds, distance = load_input(request)
+    return send_from_directory(app.static_folder, flask.request.path[1:])
+    
+    
+def load_input():
+    return (parse_int(flask.request.form.get("h", "0")),
+            parse_int(flask.request.form.get("m", "1")),
+            parse_int(flask.request.form.get("s", "30")),
+            parse_float(flask.request.form.get("d", "0.1")))
+            
+    
+@app.route("/calc", methods=["POST"])
+def get_calc():
+    hours, minutes, seconds, distance = load_input()
     calc = Calculator(distance, hours, minutes, seconds)
     calc.calculate()
 
@@ -72,8 +63,13 @@ def post_calculate():
         'tkm': Calculator.format_time(calc.get_time_per_1000m())
     }
 
-    return render_template("answer.html", **template_values)
+    return flask.render_template("answer.html", **template_values)
 
 
+@app.route("/")
+def get_index():
+    return flask.send_from_directory(app.static_folder, "index.html")
+    
+    
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
