@@ -3,7 +3,7 @@ NataCalc
 
 Tiempos medios nadando / Mean pace times swimming
 <p>
-<a target="_blank" href="http://natacalc.herokuapp.com/">Web</a>
+<a target="_blank" href="http://natacalc.appspot.com/">Web</a>
 <p>
 Created using:
   
